@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="./library/apiRequests.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<h1>API Client - CSIndex</h1>
+		<hr>
+
+		<form>
+			<h3>1- Número de publicações em uma determinada conferência de uma área</h3>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = ai / Conferencia = GECCO</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url1">URL 1</label>
+							<input id="url1" class="form-control" type="text" placeholder="http://localhost:8080/publications/areas/conferences?area=ai&conferences=GECCO" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getNumberOfPublicationsByConferences('ai', 'GECCO', 'result1')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result1">Result</label>
+							<textarea class="form-control" id="result1" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = arch / Conferencia = PDP</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url2">URL 2</label>
+							<input id="url2" class="form-control" type="text" placeholder="http://localhost:8080/publications/areas/conferences?area=arch&conferences=PDP" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getNumberOfPublicationsByConferences('arch', 'PDP', 'result2')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result2">Result</label>
+							<textarea class="form-control" id="result2" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h3>2- Número de publicações no conjunto de conferências de uma área</h3>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = ai / Conferencia = GECCO e AAAI</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url3">URL 3</label>
+							<input id="url3" class="form-control" type="text" placeholder="http://localhost:8080/publications/areas/conferences?area=ai&conferences=GECCO,AAAI" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getNumberOfPublicationsByConferences('ai', 'GECCO,AAAI', 'result3')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result3">Result</label>
+							<textarea class="form-control" id="result3" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = arch / Conferencia = PDP e HPCA</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url4">URL 4</label>
+							<input id="url4" class="form-control" type="text" placeholder="http://localhost:8080/publications/areas/conferences?area=arch&conferences=PDP,HPCA" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getNumberOfPublicationsByConferences('arch', 'PDP,HPCA', 'result4')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result4">Result</label>
+							<textarea class="form-control" id="result4" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h3>3- Scores de todos os departamentos em uma área</h3>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = ai</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url5">URL 5</label>
+							<input id="url5" class="form-control" type="text" placeholder="http://localhost:8080/scores/areas/departments?area=ai" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getScoresByDepartments('ai', '', 'result5')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result5">Result</label>
+							<textarea class="form-control" id="result5" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = arch</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url6">URL 6</label>
+							<input id="url6" class="form-control" type="text" placeholder="http://localhost:8080/scores/areas/departments?area=arch" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getScoresByDepartments('arch', '', 'result6')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result6">Result</label>
+							<textarea class="form-control" id="result6" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h3>4- Score de um determinado departamento em uma área</h3>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = ai / Departmento = UFPR</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url7">URL 7</label>
+							<input id="url7" class="form-control" type="text" placeholder="http://localhost:8080/scores/areas/departments?area=ai&department=UFPR" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getScoresByDepartments('ai', 'UFPR', 'result7')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result7">Result</label>
+							<textarea class="form-control" id="result7" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = arch / Departamento = UFF</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url8">URL 8</label>
+							<input id="url8" class="form-control" type="text" placeholder="http://localhost:8080/scores/areas/departments?area=arch&department=UFF" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getScoresByDepartments('arch', 'UFF', 'result8')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result8">Result</label>
+							<textarea class="form-control" id="result8" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h3>5- Número de professores que publicam em uma determinada área (organizados por departamentos)</h3>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = ai</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url9">URL 9</label>
+							<input id="url9" class="form-control" type="text" placeholder="http://localhost:8080/professors/areas/departments?area=ai" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getNumberOfProfessorsByDepartments('ai', '', 'result9')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result9">Result</label>
+							<textarea class="form-control" id="result9" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = arch</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url10">URL 10</label>
+							<input id="url10" class="form-control" type="text" placeholder="http://localhost:8080/professors/areas/departments?area=arch" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getNumberOfProfessorsByDepartments('arch', '', 'result10')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result10">Result</label>
+							<textarea class="form-control" id="result10" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h3>6- Número de professores de um determinado departamento que publicam em uma área</h3>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = ai / Departamento = UFPR</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url11">URL 11</label>
+							<input id="url11" class="form-control" type="text" placeholder="http://localhost:8080/professors/areas/departments?area=ai&department=UFPR" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getNumberOfProfessorsByDepartments('ai', 'UFPR', 'result11')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result11">Result</label>
+							<textarea class="form-control" id="result11" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = arch / Departamento = UFF</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url12">URL 12</label>
+							<input id="url12" class="form-control" type="text" placeholder="http://localhost:8080/professors/areas/departments?area=arch&department=UFF" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getNumberOfProfessorsByDepartments('arch', 'UFF', 'result12')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result12">Result</label>
+							<textarea class="form-control" id="result12" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h3>7- Todos os papers de uma área (ano, título, deptos e autores)</h3>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = ai</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url13">URL 13</label>
+							<input id="url13" class="form-control" type="text" placeholder="http://localhost:8080/papers/areas?area=ai" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getPapers('ai', '', '', '', 'result13')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result13">Result</label>
+							<textarea class="form-control" id="result13" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = arch</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url14">URL 14</label>
+							<input id="url14" class="form-control" type="text" placeholder="http://localhost:8080/papers/areas?area=arch" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getPapers('arch', '', '', '', 'result14')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result14">Result</label>
+							<textarea class="form-control" id="result14" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h3>8- Todos os papers de uma área em um determinado ano</h3>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = ai / Ano = 2017</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url15">URL 15</label>
+							<input id="url15" class="form-control" type="text" placeholder="http://localhost:8080/papers/areas?area=ai&year=2017" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getPapers('ai', '2017', '', '', 'result15')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result15">Result</label>
+							<textarea class="form-control" id="result15" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = arch / Ano = 2017</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url16">URL 16</label>
+							<input id="url16" class="form-control" type="text" placeholder="http://localhost:8080/papers/areas?area=arch&year=2017" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getPapers('arch', '2017', '', '', 'result16')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result16">Result</label>
+							<textarea class="form-control" id="result16" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h3>9- Todos os papers de um departamento em uma área</h3>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = ai / Departamento = AAAI</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url17">URL 17</label>
+							<input id="url17" class="form-control" type="text" placeholder="http://localhost:8080/papers/areas?area=ai&department=AAAI" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getPapers('ai', '', 'AAAI', '', 'result17')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result17">Result</label>
+							<textarea class="form-control" id="result17" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = arch / Departamento = ICPP</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url18">URL 18</label>
+							<input id="url18" class="form-control" type="text" placeholder="http://localhost:8080/papers/areas?area=arch&department=ICPP" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getPapers('arch', '', 'ICPP', '', 'result18')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result18">Result</label>
+							<textarea class="form-control" id="result18" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h3>10- Todos os papers de um professor (dado o seu nome)</h3>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = ai / Professor = Glauber De Bona</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url19">URL 19</label>
+							<input id="url19" class="form-control" type="text" placeholder="http://localhost:8080/papers/areas?area=ai&professor=Glauber De Bona" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getPapers('ai', '', '', 'Glauber De Bona', 'result19')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result19">Result</label>
+							<textarea class="form-control" id="result19" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Area = arch / Professor = Matthias Diener</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="url20">URL 20</label>
+							<input id="url20" class="form-control" type="text" placeholder="http://localhost:8080/papers/areas?area=arch&professor=Matthias Diener" readonly>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary mb-2" onclick="getPapers('arch', '', '', 'Matthias Diener', 'result20')">Enviar</button>
+						</div>
+						<div class="form-group">
+							<label for="result20">Result</label>
+							<textarea class="form-control" id="result20" rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
