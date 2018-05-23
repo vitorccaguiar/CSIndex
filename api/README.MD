@@ -55,7 +55,7 @@
 
 * **Sample Call:**
 
-  <_Just a sample call to your endpoint in a runnable format ($.ajax call or a curl request) - this makes life easier and more predictable._> 
+  There are some examples in the client file. It can be oppened in the api folder with the name client.html by using the Google Chrome browser.
 
 * **URL**
 
@@ -111,7 +111,7 @@
 
 * **Sample Call:**
 
-  <_Just a sample call to your endpoint in a runnable format ($.ajax call or a curl request) - this makes life easier and more predictable._> 
+  There are some examples in the client file. It can be oppened in the api folder with the name client.html by using the Google Chrome browser.
   
   
 * **URL**
@@ -168,7 +168,7 @@
 
 * **Sample Call:**
 
-  <_Just a sample call to your endpoint in a runnable format ($.ajax call or a curl request) - this makes life easier and more predictable._> 
+  There are some examples in the client file. It can be oppened in the api folder with the name client.html by using the Google Chrome browser. 
   
    
 * **URL**
@@ -257,4 +257,4 @@
   
 * **Sample Call:**
 
-  <_Just a sample call to your endpoint in a runnable format ($.ajax call or a curl request) - this makes life easier and more predictable._> 
+  There are some examples in the client file. It can be oppened in the api folder with the name client.html by using the Google Chrome browser.
